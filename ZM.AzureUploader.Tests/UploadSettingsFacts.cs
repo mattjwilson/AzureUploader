@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZM.AzureUploader
+namespace ZM.AzureUploader.Tests
 {
-    public class Class1
+    public class UploadSettingsFacts
     {
     }
 }
