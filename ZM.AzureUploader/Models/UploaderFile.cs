@@ -49,6 +49,16 @@
         /// </summary>
         public string ModifiedByKey { get; set; }
 
+        /// <summary>
+        /// Gets or sets a reference to a value indicating if the blob is shared or should be considered private.
+        /// </summary>
+        public bool Private { get; set; }
+
+        /// <summary>
+        /// Gets or sets a reference to a value representing the  shared access key given to people allowed to download the blob (if private).
+        /// </summary>
+        public string SharedKey { get; set; }
+
         #endregion
     }
 }
