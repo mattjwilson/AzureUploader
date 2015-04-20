@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureUploaderContext.cs" />
+    <Compile Include="IBlobSource.cs" />
+    <Compile Include="IMetadataSource.cs" />
     <Compile Include="IUploaderContext.cs" />
     <Compile Include="IUploadSettings.cs" />
     <Compile Include="Models\UploaderFile.cs" />

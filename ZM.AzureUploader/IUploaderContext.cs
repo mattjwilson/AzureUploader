@@ -1,9 +1,6 @@
 ﻿namespace ZM.AzureUploader
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using ZM.AzureUploader.Models;
 
@@ -12,6 +9,15 @@
     /// </summary>
     public interface IUploaderContext
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to a value indicating if the context has changed, or has pending changes to be saved to the underlying tier.
+        /// </summary>
+        bool IsDirty { get; }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -25,8 +31,8 @@
         /// Gets or sets a reference to an object representing a blob / file to be stored.
         /// </summary>
         /// <param name="blob"></param>
-        /// <returns></returns>
-        Task Add(UploaderFile blob);
+        /// <returns>An <see cref="UploaderFile"/> representing the file added to the context.</returns>
+        UploaderFile Add(UploaderFile blob);
 
         /// <summary>
         /// Method called to publish the current units of work to the remote storage containers.
