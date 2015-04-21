@@ -1,35 +1,48 @@
 ﻿namespace ZM.AzureUploader
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using ZM.AzureUploader.Models;
 
     /// <summary>
-    /// Defines the structure required of any object responsible for providing sourcing for the metadata surrounding the blobs being stored.
+    /// Responsible for managing the storage and retrieval of metadata for a blob in an azure table source.
     /// </summary>
-    public interface IMetadataSource
+    public class AzureTableMetadataSource : IMetadataSource
     {
-        #region Methods
+        #region IMetadataSource members
 
         /// <summary>
         /// Adds the metadata associated with a uploaded blob to the underlying table layer.
         /// </summary>
         /// <param name="data">A <see cref="Metadata"/> based object reprsenting the data to be saved.</param>
         /// <returns>A <see cref="Task"/> based object.</returns>
-        Task AddAsync(Metadata data);
+        public Task AddAsync(Metadata data)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Finds the metadata for a given blob, searched by term or key.
         /// </summary>
         /// <param name="key">A <see cref="string"/> value representing the term or key to be searched for.</param>
         /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="Metadata"/> based object.</returns>
-        Task<Metadata> FindAsync(string term);
+        public Task<Metadata> FindAsync(string term)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Removes a previously added metadata from the underlying storage.
         /// </summary>
         /// <param name="key">A <see cref="string"/> value representing the key of the file to be removed.</param>
         /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="Metadata"/> object represnting the data that was removed.</returns>
-        Task<Metadata> RollbackAsync(string key);
+        public Task<Metadata> RollbackAsync(string key)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

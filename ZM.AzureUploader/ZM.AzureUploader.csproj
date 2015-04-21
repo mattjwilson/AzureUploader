@@ -39,11 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureBlobSource.cs" />
+    <Compile Include="AzureTableMetadataSource.cs" />
     <Compile Include="AzureUploaderContext.cs" />
     <Compile Include="IBlobSource.cs" />
     <Compile Include="IMetadataSource.cs" />
+    <Compile Include="IUploaderCache.cs" />
     <Compile Include="IUploaderContext.cs" />
     <Compile Include="IUploadSettings.cs" />
+    <Compile Include="Models\Blob.cs" />
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\UploaderFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

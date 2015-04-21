@@ -14,7 +14,6 @@
     {
         #region Fields
 
-        private readonly IUploadSettings settings;
         private readonly IBlobSource blobSource;
         private readonly IMetadataSource metadataSource;
 
@@ -29,18 +28,14 @@
         /// Creates a new instance of the <see cref="AzureUploaderContext"/> class, requiring runtime settings to be provided.
         /// </summary>
         /// <param name="settings">An <see cref="IUploadSettings"/> </param>
-        public AzureUploaderContext(IUploadSettings settings, IBlobSource blobSource, IMetadataSource metadataSource)
+        public AzureUploaderContext(IBlobSource blobSource, IMetadataSource metadataSource)
         {
-            if (settings == null)
-                throw new ArgumentNullException("settings");
-
             if (blobSource == null)
                 throw new ArgumentNullException("blobSource");
 
             if (metadataSource == null)
                 throw new ArgumentNullException("metadataSource");
 
-            this.settings = settings;
             this.blobSource = blobSource;
             this.metadataSource = metadataSource;
         }

@@ -10,7 +10,12 @@
         /// <summary>
         /// Gets or sets a reference to a value representing the connection string used to access the Azure Blob storage.
         /// </summary>
-        string StorageConnectionString { get; set; }
+        string BlobConnectionString { get; set; }
+
+        /// <summary>
+        /// Gets or sets a reference to a value representing the connection string used to access the Azure Blob storage.
+        /// </summary>
+        string MetadataConnectionString { get; set; }
 
         #endregion
     }
