@@ -22,7 +22,7 @@
         /// <summary>
         /// Gets or sets a reference to a value representing the actual file to be stored in blob storage.
         /// </summary>
-        public Stream File { get; set; }
+        public MemoryStream File { get; set; }
 
         #endregion
     }

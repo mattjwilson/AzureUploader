@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using ZM.AzureUploader.Models;
 
@@ -17,7 +15,7 @@
         private readonly IBlobSource blobSource;
         private readonly IMetadataSource metadataSource;
 
-        private readonly List<UploaderFile> toUpload = new List<UploaderFile>();
+        private readonly List<UploaderFile> toUpload = new List<UploaderFile>(); // not multi-thread.  need to update this or handle multithreaded situations.
         private volatile bool isUploading;
 
         #endregion
@@ -43,15 +41,6 @@
         #endregion
 
         #region Methods
-
-        private async Task UploadFiles()
-        {
-            await Task.Run(() =>
-                {
-                    // TODO: Stuff.  And things.  Let's do things too.  I hear things are cool.
-                });
-        }
-
         #endregion
 
         #region IUploaderContext members
@@ -90,10 +79,38 @@
         /// <returns>A <see cref="Task"/> based object.</returns>
         public async Task SaveAsync()
         {
-            if(this.IsDirty)
-                await this.UploadFiles();
+            if (!this.IsDirty || this.isUploading)
+                return;
 
+            this.isUploading = true;
+
+            foreach(var file in this.toUpload)
+            {
+                try
+                {
+                    await this.blobSource.UploadAsync(file.File);
+                }
+                catch(Exception ex)
+                {
+                    // catch, notify, and skip.
+                    // Should we continue processing?
+                }
+
+                // if continue processing and not skip.
+                try
+                {
+                    await this.metadataSource.AddAsync(file.FileMetadata);
+                }
+                catch(Exception ex)
+                {
+                    // catch, and rollback.
+                    // need to add remove from blob source.
+                }
+            }
+
+            this.toUpload.Clear();
             this.IsDirty = false;
+            this.isUploading = false;
         }
 
         #endregion

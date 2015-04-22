@@ -19,7 +19,7 @@
         /// </summary>
         /// <param name="data">A <see cref="Metadata"/> based object reprsenting the data to be saved.</param>
         /// <returns>A <see cref="Task"/> based object.</returns>
-        public Task AddAsync(Metadata data)
+        public async Task AddAsync(Metadata data)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@
         /// </summary>
         /// <param name="key">A <see cref="string"/> value representing the term or key to be searched for.</param>
         /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="Metadata"/> based object.</returns>
-        public Task<Metadata> FindAsync(string term)
+        public async Task<Metadata> FindAsync(string term)
         {
             throw new NotImplementedException();
         }
@@ -39,7 +39,7 @@
         /// </summary>
         /// <param name="key">A <see cref="string"/> value representing the key of the file to be removed.</param>
         /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="Metadata"/> object represnting the data that was removed.</returns>
-        public Task<Metadata> RollbackAsync(string key)
+        public async Task<Metadata> RollbackAsync(string key)
         {
             throw new NotImplementedException();
         }
