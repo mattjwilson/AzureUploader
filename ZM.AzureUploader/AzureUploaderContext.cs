@@ -88,7 +88,7 @@
             {
                 try
                 {
-                    await this.blobSource.UploadAsync(file.File);
+                    await this.blobSource.UploadAsync(file);
                 }
                 catch(Exception ex)
                 {

@@ -2,6 +2,7 @@
 {
     using System.IO;
     using System.Threading.Tasks;
+    using ZM.AzureUploader.Models;
 
     /// <summary>
     /// Defines the structure required of any object providing sourcing services for the actual blob storage.
@@ -13,9 +14,9 @@
         /// <summary>
         /// Method called to add a new blob to the underlying storage.
         /// </summary>
-        /// <param name="blob">A <see cref="MemoryStream"/> based object representing the object being stored.</param>
+        /// <param name="file">A <see cref="UploaderFile"/> based object representing the object being stored.</param>
         /// <returns>A <see cref="Task"/> based object.</returns>
-        Task UploadAsync(MemoryStream blob);
+        Task UploadAsync(UploaderFile file);
 
         /// <summary>
         /// Retrieves a blob from the remote Azure store.

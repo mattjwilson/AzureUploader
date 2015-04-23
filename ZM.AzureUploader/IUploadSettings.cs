@@ -8,14 +8,19 @@
         #region Properties
 
         /// <summary>
-        /// Gets or sets a reference to a value representing the connection string used to access the Azure Blob storage.
+        /// Gets a reference to a value representing the connection string used to access the Azure Blob storage.
         /// </summary>
-        string BlobConnectionString { get; set; }
+        string BlobConnectionString { get; }
 
         /// <summary>
-        /// Gets or sets a reference to a value representing the connection string used to access the Azure Blob storage.
+        /// Gets a reference to a value representing the connection string used to access the Azure Blob storage.
         /// </summary>
-        string MetadataConnectionString { get; set; }
+        string MetadataConnectionString { get; }
+
+        /// <summary>
+        /// Gets a reference to a value representing the name of the container the blobs are stored in.
+        /// </summary>
+        string BlobContainerName { get; }
 
         #endregion
     }
