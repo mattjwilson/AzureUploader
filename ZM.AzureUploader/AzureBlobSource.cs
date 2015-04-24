@@ -1,11 +1,11 @@
 ﻿namespace ZM.AzureUploader
 {
     using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using ZM.AzureUploader.Models;
+    using Microsoft.WindowsAzure.Storage.Blob;
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+    using ZM.AzureUploader.Models;
 
     /// <summary>
     /// Class responsible for storing and retrieving blobs from an azure storage source.
@@ -14,7 +14,7 @@ using ZM.AzureUploader.Models;
     {
         #region Fields
 
-        private readonly IUploadSettings settings;
+        private readonly IContainerFactory factory;
 
         #endregion
 
@@ -23,28 +23,18 @@ using ZM.AzureUploader.Models;
         /// <summary>
         /// Creates a new instance of the <see cref="AzureBlobSource"/> class, requiring 
         /// </summary>
-        /// <param name="settings">An <see cref="IUploadSettings"/> based object capable of providing the information needed to connect to the Azure blob storage.</param>
-        public AzureBlobSource(IUploadSettings settings)
+        /// <param name="factory">An <see cref="IContainerFactory"/> based object capable of providing the proxy clients required to acess the underlying data store.</param>
+        public AzureBlobSource(IContainerFactory factory)
         {
-            if (settings == null)
+            if (factory == null)
                 throw new ArgumentNullException("settings");
 
-            this.settings = settings;
+            this.factory = factory;
         }
 
         #endregion
 
         #region Methods
-
-        private CloudBlobContainer BuildBlobContainer()
-        {
-            var account = CloudStorageAccount.Parse(this.settings.BlobConnectionString);
-            var client = account.CreateCloudBlobClient();
-            var container = client.GetContainerReference(this.settings.BlobContainerName);
-
-            return container;
-        }
-
         #endregion
 
         #region IBlobSource members
@@ -56,7 +46,7 @@ using ZM.AzureUploader.Models;
         /// <returns>A <see cref="Task"/> based object.</returns>
         public async Task UploadAsync(UploaderFile file)
         {
-            var container = this.BuildBlobContainer();
+            var container = await this.factory.CreateBlobContainer();
             var blob = container.GetBlockBlobReference(file.FileMetadata.FileName);
 
             await blob.UploadFromStreamAsync(file.File);
@@ -69,7 +59,7 @@ using ZM.AzureUploader.Models;
         /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="MemoryStream"/> based object.</returns>
         public async Task<MemoryStream> FindAsync(string key)
         {
-            var container = this.BuildBlobContainer();
+            var container = await this.factory.CreateBlobContainer();
             var blob = container.GetBlockBlobReference(key);
 
             MemoryStream stream = new MemoryStream();
@@ -78,6 +68,18 @@ using ZM.AzureUploader.Models;
             // potentially not return memorystream here.  Can i guarantee it's disposal?
             // http://azure.microsoft.com/en-us/documentation/articles/storage-dotnet-how-to-use-blobs/
             return stream;
+        }
+
+        /// <summary>
+        /// Removes a previously submiteted and saved blob element.
+        /// </summary>
+        /// <param name="key">A <see cref="string"/> value.</param>
+        /// <returns>A <see cref="Task"/> based object.</returns>
+        public async Task RollbackAsync(string key)
+        {
+            var container = await this.factory.CreateBlobContainer();
+            var blob = container.GetBlockBlobReference(key);
+            await blob.DeleteAsync();
         }
 
         #endregion

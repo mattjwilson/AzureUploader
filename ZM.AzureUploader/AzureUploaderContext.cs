@@ -83,28 +83,31 @@
                 return;
 
             this.isUploading = true;
-
             foreach(var file in this.toUpload)
             {
+                var success = true;
                 try
                 {
                     await this.blobSource.UploadAsync(file);
                 }
                 catch(Exception ex)
                 {
-                    // catch, notify, and skip.
-                    // Should we continue processing?
+                    break;
                 }
 
-                // if continue processing and not skip.
                 try
                 {
                     await this.metadataSource.AddAsync(file.FileMetadata);
                 }
                 catch(Exception ex)
                 {
-                    // catch, and rollback.
-                    // need to add remove from blob source.
+                    success = false;
+                    break;
+                }
+
+                if (!success)
+                {
+                    await this.blobSource.RollbackAsync(file.FileMetadata.FileName);
                 }
             }
 

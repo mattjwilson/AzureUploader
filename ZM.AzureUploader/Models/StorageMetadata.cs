@@ -1,11 +1,16 @@
 ﻿namespace ZM.AzureUploader.Models
 {
+    using Microsoft.WindowsAzure.Storage.Table;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
-    /// Represents a single element of metadata associated with a blob element being uploaded.
+    /// Represents a single metadata element to be saved in the associated table.
     /// </summary>
-    public class Metadata
+    internal class StorageMetadata : TableEntity
     {
         #region Properties
 

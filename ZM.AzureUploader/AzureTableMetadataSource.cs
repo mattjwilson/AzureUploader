@@ -1,5 +1,6 @@
 ﻿namespace ZM.AzureUploader
 {
+    using Microsoft.WindowsAzure.Storage.Table;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -12,6 +13,28 @@
     /// </summary>
     public class AzureTableMetadataSource : IMetadataSource
     {
+        #region Fields
+
+        private readonly IContainerFactory factory;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="AzureTableMetadataSource"/> class.
+        /// </summary>
+        /// <param name="factory">An <see cref="IContainerFactor"/> capable of container instantiation.</param>
+        public AzureTableMetadataSource(IContainerFactory factory)
+        {
+            if (factory == null)
+                throw new ArgumentNullException("factory");
+
+            this.factory = factory;
+        }
+
+        #endregion
+
         #region IMetadataSource members
 
         /// <summary>
@@ -21,7 +44,10 @@
         /// <returns>A <see cref="Task"/> based object.</returns>
         public async Task AddAsync(Metadata data)
         {
-            throw new NotImplementedException();
+            var table = await this.factory.CreateTableProxy();
+            var insert = TableOperation.Insert(data.ToStorageMetadata());
+
+            await table.ExecuteAsync(insert);
         }
 
         /// <summary>
@@ -31,6 +57,7 @@
         /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="Metadata"/> based object.</returns>
         public async Task<Metadata> FindAsync(string term)
         {
+
             throw new NotImplementedException();
         }
 

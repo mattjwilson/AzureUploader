@@ -25,6 +25,13 @@
         /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="MemoryStream"/> based object.</returns>
         Task<MemoryStream> FindAsync(string key);
 
+        /// <summary>
+        /// Removes a previously submiteted and saved blob element.
+        /// </summary>
+        /// <param name="key">A <see cref="string"/> value.</param>
+        /// <returns>A <see cref="Task"/> based object.</returns>
+        Task RollbackAsync(string key);
+
         #endregion
     }
 }

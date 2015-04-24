@@ -51,11 +51,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MetadataExtensionsFacts.cs" />
     <Compile Include="UploadSettingsFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZM.AzureUploader\ZM.AzureUploader.csproj">
+      <Project>{513d205a-1e9b-48fa-bac8-f76a96c67e15}</Project>
+      <Name>ZM.AzureUploader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
