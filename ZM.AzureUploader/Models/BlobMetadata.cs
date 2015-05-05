@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents a single element of metadata associated with a blob element being uploaded.
     /// </summary>
-    public class Metadata
+    public class BlobMetadata
     {
         #region Properties
 

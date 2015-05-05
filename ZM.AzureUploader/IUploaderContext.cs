@@ -25,6 +25,7 @@
         /// </summary>
         /// <param name="searchKey">A <see cref="string"/> value representing the search key to use in matching the results.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> based collection of <see cref="UploaderFile"/> based objects.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Task / TPL behavior.")]
         Task<IEnumerable<UploaderFile>> SearchAsync(string searchKey);
 
         /// <summary>

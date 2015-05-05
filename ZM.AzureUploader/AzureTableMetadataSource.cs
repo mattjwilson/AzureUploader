@@ -40,9 +40,9 @@
         /// <summary>
         /// Adds the metadata associated with a uploaded blob to the underlying table layer.
         /// </summary>
-        /// <param name="data">A <see cref="Metadata"/> based object reprsenting the data to be saved.</param>
+        /// <param name="data">A <see cref="BlobMetadata"/> based object reprsenting the data to be saved.</param>
         /// <returns>A <see cref="Task"/> based object.</returns>
-        public async Task AddAsync(Metadata data)
+        public async Task AddAsync(BlobMetadata data)
         {
             var table = await this.factory.CreateTableProxy();
             var insert = TableOperation.Insert(data.ToStorageMetadata());
@@ -54,8 +54,8 @@
         /// Finds the metadata for a given blob, searched by term or key.
         /// </summary>
         /// <param name="key">A <see cref="string"/> value representing the term or key to be searched for.</param>
-        /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="Metadata"/> based object.</returns>
-        public async Task<Metadata> FindAsync(string term)
+        /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="BlobMetadata"/> based object.</returns>
+        public async Task<BlobMetadata> FindAsync(string term)
         {
 
             throw new NotImplementedException();
@@ -65,8 +65,8 @@
         /// Removes a previously added metadata from the underlying storage.
         /// </summary>
         /// <param name="key">A <see cref="string"/> value representing the key of the file to be removed.</param>
-        /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="Metadata"/> object represnting the data that was removed.</returns>
-        public async Task<Metadata> RollbackAsync(string key)
+        /// <returns>A <see cref="Task{T}"/> based object returning a <see cref="BlobMetadata"/> object represnting the data that was removed.</returns>
+        public async Task<BlobMetadata> RollbackAsync(string key)
         {
             throw new NotImplementedException();
         }

@@ -8,11 +8,11 @@
 using ZM.AzureUploader.Models;
 
     /// <summary>
-    /// Extension methods for the <see cref="Metadata"/> class.
+    /// Extension methods for the <see cref="BlobMetadata"/> class.
     /// </summary>
     internal static class MetadataExtensions
     {
-        internal static StorageMetadata ToStorageMetadata(this Metadata data)
+        internal static StorageMetadata ToStorageMetadata(this BlobMetadata data)
         {
             var metadata = new StorageMetadata
             {

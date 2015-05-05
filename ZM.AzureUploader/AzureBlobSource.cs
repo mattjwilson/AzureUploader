@@ -27,7 +27,7 @@
         public AzureBlobSource(IContainerFactory factory)
         {
             if (factory == null)
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException("factory");
 
             this.factory = factory;
         }

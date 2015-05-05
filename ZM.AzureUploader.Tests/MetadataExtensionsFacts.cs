@@ -18,7 +18,7 @@ using Xunit;
             var date = DateTime.UtcNow;
             var dateTwo = DateTime.UtcNow;
 
-            var target = new Metadata
+            var target = new BlobMetadata
             {
                 CreatedDate = date,
                 Description = "test description",

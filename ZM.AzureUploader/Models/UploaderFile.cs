@@ -17,7 +17,7 @@
         /// <summary>
         /// Gets or sets a reference to an object containing the metadata around the blob being uploaded.
         /// </summary>
-        public Metadata FileMetadata { get; set; }
+        public BlobMetadata FileMetadata { get; set; }
 
         /// <summary>
         /// Gets or sets a reference to a value representing the actual file to be stored in blob storage.
