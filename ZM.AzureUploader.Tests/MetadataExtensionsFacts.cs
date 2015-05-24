@@ -5,8 +5,9 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-using Xunit;
+    using Xunit;
     using ZM.AzureUploader.Models;
+    using ZM.AzureUploader;
 
     public class MetadataExtensionsFacts
     {
@@ -30,7 +31,9 @@ using Xunit;
                 UploaderKey = "123458"
             };
 
-            
+            var result = target.ToStorageMetadata();
+
+            //Assert.Equal(target.CreatedDate, result.CreatedDate);
         }
 
         #endregion
